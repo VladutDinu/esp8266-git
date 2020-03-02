@@ -39,14 +39,14 @@
 #include <FirebaseArduino.h>
 
 // Set these to run example.
-#define FIREBASE_HOST "esp8266-dht11-cefb4.firebaseio.com"
-#define FIREBASE_AUTH "sGEkBDJfGTd6Y8fVp2lP6JiaMDDDNBL6E9n2n8iQ"
-#define WIFI_SSID "Camera X"
-#define WIFI_PASSWORD "a6intra1"
+#define FIREBASE_HOST "link.firebaseio.com"
+#define FIREBASE_AUTH "secret"
+#define WIFI_SSID "ssid"
+#define WIFI_PASSWORD "pass"
 #include <Wire.h>
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
-char auth[] = "OO3zw6BqkLmEv6bLudDJZdHOCjmx_o5T"; //Enter the Auth code which was send by Blink
+char auth[] = "secret"; //Enter the Auth code which was send by Blink
 #define DHTPIN 2
 // Uncomment whatever type you're using!
 #define DHTTYPE DHT11     // DHT 11
@@ -81,14 +81,15 @@ void sendSensor()
   // Please don't send more that 10 values per second.
   Blynk.virtualWrite(V6, calcH(h));  //V5 is for Humidity
   Blynk.virtualWrite(V5, calcT(t));  //V6 is for Temperature
-  Firebase.setFloat("DHT11_t/temperaturaDHT11", calcT(t));
+  
+  Firebase.setFloat("temperaturaDHT11", calcT(t));
   // handle error
   if (Firebase.failed()) {
       Serial.print("temperatura failed:");
       Serial.println(Firebase.error());  
       return;
   }
-  Firebase.setFloat("DTH11_h/umiditateDHT11", calcH(h));
+  Firebase.setFloat("umiditateDHT11", calcH(h));
   // handle error
   if (Firebase.failed()) {
       Serial.print("umiditate failed:");
