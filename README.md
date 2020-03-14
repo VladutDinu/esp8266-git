@@ -5,6 +5,7 @@ Did :
 ->Get temp from firebase
 ->Get humd from firebase
 ->Plot (temp,humd)
+->Send to firebase timestamp
+->Plot temp and humd based on time every 10 sec
 
-To Do:
--> Plot something better
+TO DO : ???
