@@ -81,7 +81,10 @@ void sendSensor()
   // Please don't send more that 10 values per second.
   Blynk.virtualWrite(V6, calcH(h));  //V5 is for Humidity
   Blynk.virtualWrite(V5, calcT(t));  //V6 is for Temperature
-  
+  StaticJsonBuffer<50> jsonBuffer;
+  JsonObject& timeStampObject = jsonBuffer.createObject();
+  timeStampObject[".sv"] = "timestamp";
+  Firebase.set("timeStampDHT11", timeStampObject);
   Firebase.setFloat("temperaturaDHT11", calcT(t));
   // handle error
   if (Firebase.failed()) {
